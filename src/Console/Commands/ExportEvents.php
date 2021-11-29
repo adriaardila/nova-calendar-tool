@@ -3,7 +3,7 @@
 namespace Czemu\NovaCalendarTool\Console\Commands;
 
 use Illuminate\Console\Command;
-use Czemu\NovaCalendarTool\Models\Event;
+use Czemu\NovaCalendarTool\Models\CalendarEvent;
 use Spatie\GoogleCalendar\Event as GoogleEvent;
 
 class ExportEvents extends Command
@@ -39,7 +39,7 @@ class ExportEvents extends Command
      */
     public function handle()
     {
-        $events = Event::where('google_calendar_id', NULL)->get();
+        $events = CalendarEvent::where('google_calendar_id', NULL)->get();
 
         if (count($events))
         {

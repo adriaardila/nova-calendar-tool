@@ -2,7 +2,7 @@
 
 namespace Czemu\NovaCalendarTool\Observers;
 
-use Czemu\NovaCalendarTool\Models\Event;
+use Czemu\NovaCalendarTool\Models\CalendarEvent;
 use Spatie\GoogleCalendar\Event as GoogleEvent;
 
 class EventObserver
@@ -10,10 +10,10 @@ class EventObserver
     /**
      * Handle the event "created" event.
      *
-     * @param  \Czemu\NovaCalendarTool\Models\Event $event
+     * @param  \Czemu\NovaCalendarTool\Models\CalendarEvent $event
      * @return void
      */
-    public function created(Event $event)
+    public function created(CalendarEvent $event)
     {
         $googleEvent = GoogleEvent::create([
             'name' => $event->title,
@@ -32,10 +32,10 @@ class EventObserver
     /**
      * Handle the event "updated" event.
      *
-     * @param  \Czemu\NovaCalendarTool\Models\Event $event
+     * @param  \Czemu\NovaCalendarTool\Models\CalendarEvent $event
      * @return void
      */
-    public function updated(Event $event)
+    public function updated(CalendarEvent $event)
     {
         if ( ! empty($event->google_calendar_id))
         {
@@ -55,10 +55,10 @@ class EventObserver
     /**
      * Handle the event "deleted" event.
      *
-     * @param  \Czemu\NovaCalendarTool\Models\Event $event
+     * @param  \Czemu\NovaCalendarTool\Models\CalendarEvent $event
      * @return void
      */
-    public function deleted(Event $event)
+    public function deleted(CalendarEvent $event)
     {
         if ( ! empty($event->google_calendar_id))
         {
@@ -74,10 +74,10 @@ class EventObserver
     /**
      * Handle the event "restored" event.
      *
-     * @param  \Czemu\NovaCalendarTool\Models\Event $event
+     * @param  \Czemu\NovaCalendarTool\Models\CalendarEvent $event
      * @return void
      */
-    public function restored(Event $event)
+    public function restored(CalendarEvent $event)
     {
         //
     }
@@ -85,10 +85,10 @@ class EventObserver
     /**
      * Handle the event "force deleted" event.
      *
-     * @param  \Czemu\NovaCalendarTool\Models\Event $event
+     * @param  \Czemu\NovaCalendarTool\Models\CalendarEvent $event
      * @return void
      */
-    public function forceDeleted(Event $event)
+    public function forceDeleted(CalendarEvent $event)
     {
         //
     }

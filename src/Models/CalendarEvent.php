@@ -5,8 +5,10 @@ namespace Czemu\NovaCalendarTool\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class Event extends Model
+class CalendarEvent extends Model
 {
+    protected $table = 'calendar_events';
+
     protected $casts = [
         'start' => 'datetime',
         'end' => 'datetime'

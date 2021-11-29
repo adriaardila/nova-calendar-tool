@@ -2,14 +2,14 @@
 
 namespace Czemu\NovaCalendarTool\Http\Controllers;
 
-use Czemu\NovaCalendarTool\Models\Event;
+use Czemu\NovaCalendarTool\Models\CalendarEvent;
 use Illuminate\Http\Request;
 
 class EventsController
 {
     public function index(Request $request)
     {
-        $events = Event::filter($request->query())
+        $events = CalendarEvent::filter($request->query())
             ->get(['id', 'title', 'start', 'end']);
 
         return response()->json($events);
@@ -17,11 +17,11 @@ class EventsController
 
     public function store(Request $request)
     {
-        $validation = Event::getModel()->validate($request->input(), 'create');
+        $validation = CalendarEvent::getModel()->validate($request->input(), 'create');
 
         if ($validation->passes())
         {
-            $event = Event::create($request->input());
+            $event = CalendarEvent::create($request->input());
 
             if ($event)
             {
@@ -40,8 +40,8 @@ class EventsController
 
     public function update(Request $request, $eventId)
     {
-        $event = Event::findOrFail($eventId);
-        $validation = Event::getModel()->validate($request->input(), 'update');
+        $event = CalendarEvent::findOrFail($eventId);
+        $validation = CalendarEvent::getModel()->validate($request->input(), 'update');
 
         if ($validation->passes())
         {
@@ -61,7 +61,7 @@ class EventsController
 
     public function destroy(Request $request, $eventId)
     {
-        $event = Event::findOrFail($eventId);
+        $event = CalendarEvent::findOrFail($eventId);
 
         if ( ! is_null($event))
         {

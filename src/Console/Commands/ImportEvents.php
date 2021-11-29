@@ -3,7 +3,7 @@
 namespace Czemu\NovaCalendarTool\Console\Commands;
 
 use Illuminate\Console\Command;
-use Czemu\NovaCalendarTool\Models\Event;
+use Czemu\NovaCalendarTool\Models\CalendarEvent;
 use Spatie\GoogleCalendar\Event as GoogleEvent;
 
 class ImportEvents extends Command
@@ -47,12 +47,12 @@ class ImportEvents extends Command
             {
                 foreach ($googleEvents as $googleEvent)
                 {
-                    $event = Event::where('google_calendar_id', $googleEvent->id)->first();
+                    $event = CalendarEvent::where('google_calendar_id', $googleEvent->id)->first();
                     $googleEvent = $googleEvent->googleEvent;
 
                     if (is_null($event))
                     {
-                        Event::create([
+                        CalendarEvent::create([
                             'google_calendar_id' => $googleEvent->id,
                             'title' => ! empty($googleEvent->summary) ? $googleEvent->summary : 'Unnamed event',
                             'start' => ! empty($googleEvent->start->dateTime) ? $googleEvent->start->dateTime : $googleEvent->start->date,
